@@ -1,0 +1,7 @@
+这个项目用来将token转换为user
+
+input: tokenid
+output: userid
+
+读取方式：1.通过接口工厂获取接口信息
+      2.调用接口

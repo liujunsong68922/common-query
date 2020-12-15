@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <bean id="springContextHelper" 
+		class="com.liu.helper.SpringContextHelper">
+	</bean>
+    
+    <!-- 配置aop动态代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+    
+    <!-- 自动扫描包，实现支持注解的IOC -->
+    <context:component-scan base-package="com.liu.commonquery.controller" />
+
+    <!-- Spring MVC不处理静态资源 -->
+    <mvc:default-servlet-handler />
+
+    <!-- 支持mvc注解驱动 -->
+    <mvc:annotation-driven />
+
+    <!-- 视图解析器 -->
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/view/" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <!-- 注册dataSource对象 -->
+    <bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/commondataquerydb" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    
+    <!-- 下面注册多dataSource支持，一个DataSource对应一个独立的数据库 -->
+ 	<!-- 注册第二个数据库Oracle -->
+    <bean name="dataSource2" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+        <property name="username" value="scott" />
+        <property name="password" value="tiger" />
+    </bean>
+    
+ 	<!-- 注册第三个数据库Sqlite -->
+    <bean name="dataSource3" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="org.sqlite.JDBC" />
+        <property name="url" value="jdbc:sqlite:/test.db" />
+    </bean>        
+</beans>

@@ -1,0 +1,10 @@
+commonquery-tokenuser-core		
+	把tokenid翻译成userid的组件，运行在web controller层
+commonquery-designer-core		
+	这个项目本来设计是为设计器的后台，但后来使用webdw来做界面，目前为空
+commonquery-api-core		
+	通用查询组件的API定义和具体实现，包括
+	1.不进行用户鉴权的通用查询组件
+	2.进行用户鉴权和数据权限控制的通用查询组件
+commonquery-web
+	web层的测试程序和测试代码

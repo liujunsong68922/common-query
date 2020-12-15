@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/com/liu/commonquery/IDataQuery.java=UTF-8
+encoding//src/com/liu/commonquery/dao/QuerySQLDAO.java=UTF-8
+encoding//src/com/liu/commonquery/service/DBSelectOper.java=UTF-8
+encoding//src/com/liu/commonquery/service/MongoSelectOper.java=UTF-8
+encoding//src/com/liu/commonquery/service/SolrSelectOper.java=UTF-8
+encoding/<project>=UTF-8

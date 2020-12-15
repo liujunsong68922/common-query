@@ -1,0 +1,5 @@
+commonquery 这个项目里面包括了两部分
+
+commonquery包里面包含了对sql进行封装的的调用功能
+
+commonqueryprivilege里面封装了针对用户和qid的权限鉴定，以及用户的qid的数据权限鉴定

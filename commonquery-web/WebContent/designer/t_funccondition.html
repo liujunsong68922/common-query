@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/CWebDWUIView.js"></script>
+<script src="js/CWebDWMyUIComponent.js"></script>
+<style>
+.divcss5 {
+	position: relative;
+	width: 400px;
+	height: 150px;
+	overflow: auto;
+	border: 1px solid #060
+}
+</style>
+
+</head>
+<body>
+	<input type="button" onclick="setDW()" value="设置数据窗口对象">
+	请输入检索条件：
+	<input type="text" name="p_name" id="p_name" size="10">
+	<input type="button" onclick="retrieveDW()" value="检索产品清单">
+	<input type="button" onclick="insertDW()" value="插入一条记录">
+	<input type="button" onclick="deleteDW()" value="删除一行记录">
+	<input type="button" onclick="updateDW()" value="保存到数据库">
+
+	<br>
+	<div id="Picture1" name="Picture1"
+		style="position: absolute; left: 100px; top: 50px; height: 360px; width: 950px; overflow: auto;
+		border:3px solid blue">
+		<div id="Picture2" name="Picture2"
+			style="height: 250px; width: 950px; overflow: auto"></div>
+	</div>
+	<script>
+		var webdwui = new CWebDWUIView("Picture2");
+		alert("webdwui:" + webdwui);
+	</script>
+
+	<script>
+		
+		//设置后台的数据窗口对象
+		function setDW() {
+			alert("setdw test");
+			var dwname = "d_t_funccondition"; //后台数据窗口的名字
+			var iret2 = 0;
+			iret2 = webdwui.setDataobject("0",dwname);
+		}
+		
+		//设置后台的数据窗口对象
+		function insertDW() {
+			console.log("insert test");
+			var uuid = webdwui.uuid; //后台数据窗口的名字
+			var iret2 = 0;
+			iret2 = webdwui.insertrow("0",uuid);
+		}
+		
+		function deleteDW() {
+			console.log("delete test");
+			var uuid = webdwui.uuid; //后台数据窗口的名字
+			var iret2 = 0;
+			iret2 = webdwui.deleterow("0",uuid);
+		}
+		
+		//setrow
+		function setRow(rowid) {
+			console.log("setrow test:"+rowid);
+			var uuid = webdwui.uuid; //后台数据窗口的名字
+			var iret2 = 0;
+			iret2 = webdwui.setrow(uuid,rowid);
+		}
+		
+		//setdata
+		function setItem(rowid,colid,value) {
+			console.log("setitem test:"+value);
+			var uuid = webdwui.uuid; //后台数据窗口的名字
+			var iret2 = 0;
+			iret2 = webdwui.setitem(uuid,rowid,colid,value);
+		}
+		
+		function updateDW() {
+			alert("update test:");
+			var uuid = webdwui.uuid; //后台数据窗口的名字
+			var iret2 = 0;
+			iret2 = webdwui.update("0",uuid);
+		}
+		
+		//检索数据，由于后台是无状态的，因此需要重新传入数据窗口的名称进行检索
+		function retrieveDW() {
+			alert("retrieve test");
+			var dwname = "d_t_funccondition";
+			var iret3 = 0;
+			var args = "name=" + $("#p_name").val();
+			alert(args);
+			iret3 = webdwui.retrieve("",dwname,args);
+		}
+
+		//检索数据，由于后台是无状态的，因此需要重新传入数据窗口的名称进行检索
+		function testsql() {
+			alert("testsql test");
+			var strsql = "select id,name from product";
+			var stype = "grid";
+			var iret3;
+			iret3 = webdwui.retrievebysql("",strsql,stype);
+		}
+	</script>
+
+</body>
+</html>
